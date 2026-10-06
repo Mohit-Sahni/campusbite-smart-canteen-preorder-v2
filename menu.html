@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Menu | CampusBite</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="topbar">
+        <div class="nav">
+            <div class="brand">🍴 CampusBite</div>
+            <div class="navlinks"><a href="index.html">Home</a><a class="active" href="menu.html">Menu</a><a
+                    href="orders.html">My Orders</a><a href="login.html">Login</a></div>
+        </div>
+    </header>
+    <main class="container">
+        <section class="page-head">
+            <div class="eyebrow">TODAY'S CANTEEN MENU</div>
+            <h1>Choose your favourites 🍽️</h1>
+            <p>Add items to your cart and place a pre-order.</p>
+        </section>
+        <div class="student-box"><strong>Logged-in Student:</strong> <span id="loggedStudent">Student</span></div>
+        <div id="menu" class="food-grid"></div>
+        <div class="cart">
+            <h2>🛒 Your Cart</h2>
+            <div id="cartItems">No items selected.</div>
+            <div class="total-line"><strong>Total</strong><strong>₹<span id="total">0</span></strong></div><button
+                onclick="placeOrder()">Place Pre-Order</button>
+            <p id="message" class="message"></p>
+        </div>
+    </main>
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">🍴 CampusBite</div>
+            <div class="social"><a href="https://www.instagram.com/zomato/" target="_blank"
+                    rel="noopener">Instagram</a><a href="https://www.facebook.com/zomato/" target="_blank"
+                    rel="noopener">Facebook</a></div>
+            <div class="footer-note">Fresh food • Fast ordering • Smart token</div>
+        </div>
+    </footer>
+    <script src="api.js"></script>
+    <script>document.getElementById("loggedStudent").innerText = (localStorage.getItem("studentName") || "Student") + " (" + (localStorage.getItem("studentId") || "") + ")";</script>
+    <script src="script.js"></script>
+</body>
+
+</html>

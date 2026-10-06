@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Register | CampusBite</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="topbar">
+        <div class="nav">
+            <div class="brand">🍴 CampusBite</div>
+            <div class="navlinks"><a href="index.html">Home</a><a href="menu.html">Menu</a><a href="orders.html">My
+                    Orders</a><a class="active" href="register.html">Register</a></div>
+        </div>
+    </header>
+    <main class="auth-wrap">
+        <div class="auth-card">
+            <div class="big-icon">📝</div>
+            <div class="eyebrow">NEW STUDENT</div>
+            <h1>Create Account</h1>
+            <p>Register once and use CampusBite for quick ordering.</p>
+            <form id="registerForm"><label>Student Name</label><input id="name" placeholder="Enter name"
+                    required><label>Student ID</label><input id="studentId" placeholder="Enter student ID"
+                    required><label>Email</label><input id="email" type="email" placeholder="Enter email"
+                    required><label>Password</label><input id="password" type="password"
+                    placeholder="Minimum 6 characters" minlength="6" required><button type="submit">Create
+                    Account</button></form>
+            <p id="message" class="message"></p>
+            <p style="margin-top:15px">Already registered? <a href="login.html">Login</a></p>
+        </div>
+    </main>
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">🍴 CampusBite</div>
+            <div class="social"><a href="https://www.instagram.com/zomato/" target="_blank"
+                    rel="noopener">Instagram</a><a href="https://www.facebook.com/zomato/" target="_blank"
+                    rel="noopener">Facebook</a></div>
+            <div class="footer-note">Student registration for the Smart Canteen system.</div>
+        </div>
+    </footer>
+    <script src="api.js"></script>
+    <script src="auth.js"></script>
+</body>
+
+</html>

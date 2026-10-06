@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Student Login | CampusBite</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="topbar">
+        <div class="nav">
+            <div class="brand">🍴 CampusBite</div>
+            <div class="navlinks"><a href="index.html">Home</a><a href="menu.html">Menu</a><a href="orders.html">My
+                    Orders</a><a class="active" href="login.html">Login</a></div>
+        </div>
+    </header>
+    <main class="auth-wrap">
+        <div class="auth-card">
+            <div class="big-icon">👨‍🎓</div>
+            <div class="eyebrow">STUDENT ACCOUNT</div>
+            <h1>Welcome Back</h1>
+            <p>Login to continue with your canteen orders.</p>
+            <form id="loginForm"><label>Email</label><input id="email" type="email" placeholder="Enter email"
+                    required><label>Password</label><input id="password" type="password" placeholder="Enter password"
+                    required><button type="submit">Login</button></form>
+            <p id="message" class="message"></p>
+            <p style="margin-top:15px">New student? <a href="register.html">Create Account</a></p>
+            <hr class="divider">
+            <p><a href="admin.html">Admin Login →</a></p>
+        </div>
+    </main>
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">🍴 CampusBite</div>
+            <div class="social"><a href="https://www.instagram.com/zomato/" target="_blank"
+                    rel="noopener">Instagram</a><a href="https://www.facebook.com/zomato/" target="_blank"
+                    rel="noopener">Facebook</a></div>
+            <div class="footer-note">Student login • Registration • Order management</div>
+        </div>
+    </footer>
+    <script src="api.js"></script>
+    <script src="auth.js"></script>
+</body>
+
+</html>

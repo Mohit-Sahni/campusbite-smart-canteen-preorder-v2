@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>My Orders | CampusBite</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="topbar">
+        <div class="nav">
+            <div class="brand">🍴 CampusBite</div>
+            <div class="navlinks"><a href="index.html">Home</a><a href="menu.html">Menu</a><a class="active"
+                    href="orders.html">My Orders</a><a href="login.html">Login</a></div>
+        </div>
+    </header>
+    <main class="container">
+        <section class="page-head">
+            <div class="eyebrow">ORDER HISTORY</div>
+            <h1>Track your pre-orders 🎟️</h1>
+            <p>Enter your Student ID to view token numbers and order status.</p>
+        </section>
+        <div class="orders-search">
+            <p>Showing orders for <b id="loggedStudentOrder">your account</b></p>
+        </div>
+        <div id="orders" class="orders"></div>
+    </main>
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">🍴 CampusBite</div>
+            <div class="social"><a href="https://www.instagram.com/zomato/" target="_blank"
+                    rel="noopener">Instagram</a><a href="https://www.facebook.com/zomato/" target="_blank"
+                    rel="noopener">Facebook</a></div>
+            <div class="footer-note">Your token helps the canteen prepare and manage your order.</div>
+        </div>
+    </footer>
+    <script src="api.js"></script>
+    <script>document.getElementById("loggedStudentOrder").innerText = localStorage.getItem("studentId") || "your account";</script>
+    <script src="orders.js"></script>
+</body>
+
+</html>

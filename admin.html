@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Admin | CampusBite</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<header class="topbar"><div class="nav"><div class="brand">🍴 CampusBite</div><div class="navlinks"><a href="index.html">Home</a><a href="menu.html">Menu</a><a href="orders.html">My Orders</a><a class="active" href="admin.html">Admin</a></div></div></header>
+
+<main class="auth-wrap">
+  <div id="adminLoginCard" class="auth-card">
+    <div class="big-icon">🛡️</div><div class="eyebrow">ADMIN MODULE</div><h1>Admin Login</h1>
+    <p>Manage Smart Canteen orders.</p>
+    <form id="adminForm">
+      <label>Admin Email</label><input id="adminEmail" type="email" placeholder="admin@gmail.com" required>
+      <label>Admin Password</label><input id="adminPassword" type="password" placeholder="admin123" required>
+      <button type="submit">Admin Login</button>
+    </form>
+    <p id="adminMessage" class="message"></p>
+    <p style="margin-top:15px"><a href="login.html">← Student Login</a></p>
+  </div>
+
+  <div id="adminDashboard" class="admin-dashboard" style="display:none; width:100%; max-width:1050px;">
+    <div class="page-head" style="padding-top:10px"><div class="eyebrow">ADMIN DASHBOARD</div><h1>Live Canteen Orders 📋</h1><p>View incoming orders and update preparation status.</p></div>
+    <div class="student-box"><div><strong>Admin:</strong> admin@gmail.com</div><div><strong>Email concept:</strong> Order bill is sent automatically to the student's registered email.</div></div>
+    <div id="adminOrders" class="orders"></div>
+    <button id="adminLogout" class="admin-logout">Logout</button>
+  </div>
+</main>
+<footer><div class="footer-inner"><div class="footer-brand">🍴 CampusBite</div><div class="social"><a href="https://www.instagram.com/zomato/" target="_blank" rel="noopener">Instagram</a><a href="https://www.facebook.com/zomato/" target="_blank" rel="noopener">Facebook</a></div><div class="footer-note">Admin authentication • Live order management • Email receipt</div></div></footer>
+<script src="api.js"></script><script src="auth.js"></script><script>
+const dashboard = document.getElementById('adminDashboard');
+const loginCard = document.getElementById('adminLoginCard');
+const adminOrders = document.getElementById('adminOrders');
+
+function showDashboard(){ loginCard.style.display='none'; dashboard.style.display='block'; loadAdminOrders(); }
+if(localStorage.getItem('adminLoggedIn') === 'true') showDashboard();
+
+async function loadAdminOrders(){
+  try{
+    const response = await fetch(API_BASE + '/api/admin/orders');
+    const orders = await response.json();
+    if(!response.ok || !Array.isArray(orders) || orders.length===0){ adminOrders.innerHTML='<div class="order-card"><p>No orders yet.</p></div>'; return; }
+    adminOrders.innerHTML = orders.map(order => `
+      <div class="order-card">
+        <h3>🎫 Token #${order.tokenNumber}</h3>
+        <p><b>Student:</b> ${order.studentName} (${order.studentId})</p>
+        <p><b>Items:</b> ${order.items.map(i=>i.name).join(', ')}</p>
+        <p><b>Total:</b> ₹${order.total}</p>
+        <p><b>Pickup:</b> ${order.pickupDate} • ${order.pickupSlot}</p>
+        <p><b>Email:</b> Bill sent to registered student email after successful order.</p>
+        <p><b>Status:</b></p>
+        <select onchange="updateStatus('${order._id}', this.value)">
+          ${['Placed','Preparing','Ready','Completed'].map(s=>`<option ${s===order.status?'selected':''}>${s}</option>`).join('')}
+        </select>
+      </div>`).join('');
+  }catch(e){ adminOrders.innerHTML='<div class="order-card"><p>Backend not running.</p></div>'; }
+}
+
+async function updateStatus(id,status){
+  const response=await fetch(API_BASE + '/api/admin/orders/'+id+'/status',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({status})});
+  if(response.ok) loadAdminOrders();
+}
+
+document.getElementById('adminLogout').addEventListener('click',()=>{localStorage.removeItem('adminLoggedIn');location.reload();});
+setInterval(()=>{ if(localStorage.getItem('adminLoggedIn')==='true') loadAdminOrders(); },10000);
+</script>
+</body></html>
